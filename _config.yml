@@ -1,0 +1,15 @@
+# nog-yo/hitokago-guide の GitHub Pages の Jekyll の設定。baseurl はリポジトリの名前に合わせる
+title: ひとかご
+description: 買い物リストアプリ「ひとかご」の使い方とプライバシーポリシー
+lang: ja
+url: https://nog-yo.github.io
+baseurl: /hitokago-guide
+# /privacy/ のように末尾にスラッシュの付く URL にする（App Store Connect に登録する URL の形）
+permalink: pretty
+theme: jekyll-theme-primer
+# どのページにもテーマの既定のレイアウトを付ける（GitHub Actions や手元の jekyll で作った時も、GitHub Pages と同じ見た目にする）
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
