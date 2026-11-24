@@ -10,6 +10,13 @@ baseurl: /hitokago-guide
 permalink: pretty
 # CSS（assets/css/style.scss が読み込む）だけを使う。レイアウトは _layouts/default.html に自前で持つ（理由はそのファイル）
 theme: jekyll-theme-primer
+# 検索エンジンに全ページの URL を知らせる sitemap.xml を作る（Google Search Console に送る。GitHub Pages で使えるプラグイン）
+plugins:
+  - jekyll-sitemap
+# Google Search Console の所有権の確認（jekyll-seo-tag が google-site-verification の meta タグを出す）。
+# 外すと確認が取り消されるので消さない
+webmaster_verifications:
+  google: Pn35TFsX1R9Bpgtu758KYm2SH3qwHmxTm9DM-RqNwB4
 # App Store のアプリの ID（ダウンロードとレビューのリンク、Smart App Banner）
 app_store_id: 6829760587
 # 使い方のページの先頭の目次（_includes/toc.html。kramdown の自動目次）に載せる見出しの段
