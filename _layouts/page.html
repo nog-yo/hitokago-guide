@@ -1,10 +1,7 @@
 ---
-# テーマ（jekyll-theme-primer）の default のレイアウトの中に、本文と、どのページにも同じ末尾（開発者の表示）を置く。
-# テーマのレイアウトを写して書き換えず、その上に重ねる（テーマの更新をそのまま受ける）。
+# 使い方・プライバシーポリシーなど、文章のページ。テーマ（primer）の本文の見た目（markdown-body）で置く
 layout: default
 ---
+<main class="container-lg px-3 my-5 markdown-body">
 {{ content }}
-
-<hr>
-
-{% include developer.html %}
+</main>

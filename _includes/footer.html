@@ -1,0 +1,16 @@
+{% comment %}
+すべてのページの末尾。開発者の表示は、アカウントを示す普通のリンクとこのサイトの画像にする（Twitter の埋め込みは、ページを開いただけで Twitter に閲覧が伝わるので使わない）
+{% endcomment %}
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <nav class="site-footer-nav" aria-label="サイトの末尾">
+      <a href="{{ '/#guide' | relative_url }}">使い方</a>
+      <a href="{{ '/#contact' | relative_url }}">お問い合わせ</a>
+      <a href="{{ '/privacy/' | relative_url }}">プライバシーポリシー</a>
+    </nav>
+    <p class="site-developer">
+      <img src="{{ '/images/developer-icon.png' | relative_url }}" alt="" width="40" height="28">
+      <span>開発: N.Y.（Twitter: <a href="https://x.com/NdeveloperY">@NdeveloperY</a>）</span>
+    </p>
+  </div>
+</footer>

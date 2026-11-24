@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% comment %}
+すべてのページの外枠（head・ヘッダー・フッター）。テーマ（jekyll-theme-primer）の default のレイアウトを使わず、ここに自前で持つ。
+- テーマの default は、見出しの横にリンクの印を出すスクリプト（anchor-js）を外部の CDN（cdnjs.cloudflare.com）から読み込む。
+  ページを開いただけで GitHub 以外に閲覧が伝わり、プライバシーポリシーの「このサイトについて」と合わなくなるので使わない。
+- テーマの default は、ページの上にサイトの名前の見出しを出すだけで、アイコンとナビのあるヘッダーに置き換えられない。
+テーマは CSS（assets/css/style.scss）だけを使う。外部のサイトから読み込むもの（スクリプト・Web フォント・解析）は置かない。
+{% endcomment %}
+<html lang="{{ site.lang }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+{% seo %}
+    {% comment %}iOS の Safari が、ページの上に App Store へのバナー（Smart App Banner）を出す{% endcomment %}
+    <meta name="apple-itunes-app" content="app-id={{ site.app_store_id }}">
+    <meta name="theme-color" content="#38835E">
+    <link rel="icon" type="image/png" href="{{ '/assets/icons/favicon.png' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
+  </body>
+</html>

@@ -1,16 +1,26 @@
 # nog-yo/hitokago-guide の GitHub Pages の Jekyll の設定。baseurl はリポジトリの名前に合わせる
 title: ひとかご
-description: 買い物リストアプリ「ひとかご」の使い方とプライバシーポリシー
+description: お店のカゴと一緒に使う iPhone の買い物リスト「ひとかご」の紹介と使い方。アプリで扱う情報はすべて iPhone の中だけに保存し、外部へ送信しません。
+# トップのページの題名（「ひとかご | カゴ付きの買い物リスト」。jekyll-seo-tag が使う）
+tagline: カゴ付きの買い物リスト
 lang: ja
 url: https://nog-yo.github.io
 baseurl: /hitokago-guide
 # /privacy/ のように末尾にスラッシュの付く URL にする（App Store Connect に登録する URL の形）
 permalink: pretty
+# CSS（assets/css/style.scss が読み込む）だけを使う。レイアウトは _layouts/default.html に自前で持つ（理由はそのファイル）
 theme: jekyll-theme-primer
-# どのページにも、テーマの既定のレイアウトに末尾（開発者の表示）を足した page のレイアウト（_layouts/page.html）を付ける
+# App Store のアプリの ID（ダウンロードとレビューのリンク、Smart App Banner）
+app_store_id: 6829760587
+# 使い方のページの先頭の目次（_includes/toc.html。kramdown の自動目次）に載せる見出しの段
+kramdown:
+  toc_levels: 2..3
+# どのページにも、ヘッダーとフッターの間に本文を置く page のレイアウト（_layouts/page.html）と、
+# 共有した時のカードの画像（jekyll-seo-tag が og:image と twitter:card を出す）を付ける。トップは front matter で home のレイアウトにする
 # （GitHub Actions や手元の jekyll で作った時も、GitHub Pages と同じ見た目にする）
 defaults:
   - scope:
       path: ""
     values:
       layout: page
+      image: /assets/og-image.png
