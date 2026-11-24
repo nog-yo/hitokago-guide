@@ -1,0 +1,10 @@
+---
+# テーマ（jekyll-theme-primer）の default のレイアウトの中に、本文と、どのページにも同じ末尾（開発者の表示）を置く。
+# テーマのレイアウトを写して書き換えず、その上に重ねる（テーマの更新をそのまま受ける）。
+layout: default
+---
+{{ content }}
+
+<hr>
+
+{% include developer.html %}

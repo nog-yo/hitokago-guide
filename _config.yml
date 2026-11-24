@@ -7,9 +7,10 @@ baseurl: /hitokago-guide
 # /privacy/ のように末尾にスラッシュの付く URL にする（App Store Connect に登録する URL の形）
 permalink: pretty
 theme: jekyll-theme-primer
-# どのページにもテーマの既定のレイアウトを付ける（GitHub Actions や手元の jekyll で作った時も、GitHub Pages と同じ見た目にする）
+# どのページにも、テーマの既定のレイアウトに末尾（開発者の表示）を足した page のレイアウト（_layouts/page.html）を付ける
+# （GitHub Actions や手元の jekyll で作った時も、GitHub Pages と同じ見た目にする）
 defaults:
   - scope:
       path: ""
     values:
-      layout: default
+      layout: page
