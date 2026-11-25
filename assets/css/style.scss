@@ -1,7 +1,7 @@
 ---
 ---
 // テーマ（jekyll-theme-primer）の CSS の上に、ヘッダー・フッター・トップの区画と、ダークモードの色を重ねる。
-// 色はアプリに合わせる（hitokago/Design/Theme.swift の ink・green と、App Store のスクショの見出しの黄色）。
+// 色はアプリに合わせる（hitokago/Design/Theme.swift の ink・green）。
 // 文字は端末の書体を使う（Web フォントを外部から読み込まない）。
 
 @import "jekyll-theme-primer";
@@ -16,7 +16,6 @@
   --link: #0A5BC4;
   --green: #38835E;
   --green-deep: #245E41;
-  --yellow: #FFE27A;
   --code: rgba(27, 31, 35, 0.05);
 }
 
@@ -57,7 +56,7 @@ a { color: var(--link); }
     tr:nth-child(2n) { background-color: var(--grouped); }
   }
   // 画面のスクショは白い地のまま見せ、角を少し丸める
-  img { border-radius: 8px; }
+  img { height: auto; border-radius: 8px; }
 }
 
 // 使い方のページで、項目どうしが近くて続いて見えないように、見出しの前を広くあける。
@@ -154,6 +153,10 @@ html { scroll-padding-top: 64px; }
 }
 
 // トップ
+// 印の定義（index.html の先頭の svg）は、場所を取らないように流れから外す。
+// display: none にすると、斜線の周りを抜くマスク（mark-slash-cut）が効かないブラウザーがあるので、幅と高さが 0 のまま絶対配置にする。
+.home-marks { position: absolute; }
+
 .home {
   h2 { font-size: 26px; line-height: 1.35; margin: 0 0 12px; }
   h3 { font-size: 20px; line-height: 1.4; margin: 0 0 8px; }
@@ -161,16 +164,11 @@ html { scroll-padding-top: 64px; }
   section { padding: 56px 0; }
 }
 
-.home-lead { color: var(--sub-ink); font-size: 16px; margin-bottom: 28px !important; }
-.home-more { font-size: 14px; }
-
-// ヒーロー。画面の絵（App Store の表紙。濃い緑の地）と見分けられるよう、地は薄い緑にする
+// ヒーロー。地は薄い緑にし、画面の絵（濃い緑の縁の端末）が浮き立つようにする
 .home .home-hero {
   --hero-ink: var(--ink);
   --hero-sub-ink: #3C4A5C;
   --hero-accent: #2E7550;
-  --hero-pill: #FFFFFF;
-  --hero-pill-line: #BFDCCB;
   background: linear-gradient(160deg, #F4FAF6 0%, #DDEFE4 100%);
   color: var(--hero-ink);
   padding: 48px 0 0;
@@ -179,8 +177,6 @@ html { scroll-padding-top: 64px; }
   @media (prefers-color-scheme: dark) {
     --hero-sub-ink: #C7C7CC;
     --hero-accent: #8FD3AE;
-    --hero-pill: rgba(255, 255, 255, 0.08);
-    --hero-pill-line: rgba(143, 211, 174, 0.35);
     background: linear-gradient(160deg, #101A14 0%, #16271D 100%);
   }
   .home-inner {
@@ -221,56 +217,97 @@ html { scroll-padding-top: 64px; }
   img { display: block; height: 48px; width: auto; }
 }
 
-// ヒーローの約束（データの外部送信なし・アカウント登録不要・広告なし）。文字を大きく、地と枠を付けて目立たせる
+// ヒーローの約束（データの外部送信なし・アカウント登録不要・広告なし）。項目ごとに、プライバシーの区画と同じ印を先頭に付ける
 .home-promises {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0 20px;
   li {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px 8px 12px;
-    border-radius: 999px;
-    background: var(--hero-pill);
-    border: 1px solid var(--hero-pill-line);
+    gap: 6px;
     color: var(--hero-accent);
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
   }
-  svg { flex: none; }
-  a { color: var(--hero-ink); }
+  svg { flex: none; width: 18px; height: 18px; }
+  // 指で押しやすいよう、リンクの上下を広げる（行の間は、この余白で空ける）
+  a { color: var(--hero-ink); padding: 6px 0; }
 }
 
+// ヒーローの画面。アプリの実画面（home-hero.png）に、端末の枠を CSS で付ける。
+// 枠は App Store の 2 枚目のスクショの端末と同じ、濃い緑の細い縁と角丸だけにする。Apple 製品を描いた絵は使えず、
+// 一般的な端末の絵は Apple 製品に固有の細部（センサーの切り欠き・側面のボタンなど）を含めないことが条件のため
+// （App Store のマーケティングのガイドライン）。Apple が配る端末の枠は、切り抜きと影の追加ができないので使わない
 .home-hero-shot {
-  text-align: center;
-  img {
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-    margin: 0 auto;
-    border-radius: 28px 28px 0 0;
-    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.25);
-  }
+  align-self: center;
+  padding-bottom: 48px;
+}
+
+.home-hero-device {
+  width: 100%;
+  max-width: 270px;
+  margin: 0 auto;
+  border: 5px solid #1E433A;
+  border-radius: 45px;
+  overflow: hidden;
+  background: #F2F2F7;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  // 暗い地でも枠が見えるよう、縁を明るくする
+  @media (prefers-color-scheme: dark) { border-color: #3A7A5E; }
+  img { display: block; width: 100%; height: auto; }
 }
 
 // 使い方への入口（アプリのマイページから来た人がすぐ選べるよう、ヒーローの直下に置く）
 .home .home-guide {
   background: var(--grouped);
   padding: 32px 0;
-  h2 { font-size: 15px; color: var(--sub-ink); font-weight: 600; }
+  h2 { font-size: 22px; }
+}
+
+.home-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 16px 0 32px;
+  padding: 0;
+  li { margin-left: 1.6em; }
+  li::marker { font-weight: 700; }
+  h3 { font-size: 18px; margin-bottom: 4px; }
+  p { margin: 0 0 12px; line-height: 1.6; }
+  img { display: block; max-width: 100%; height: auto; border-radius: 12px; }
+  // 手順 3 は、スライドの途中の画像のすぐ下に、スライドした後の帯を置く
+  img + img { margin-top: 8px; }
+  @media (max-width: 800px) { grid-template-columns: 1fr; }
+}
+
+// 手順の見出しの終わりに、その手順でアプリの画面で押す所の絵を置く。
+// 絵だけが次の行に落ちないよう、見出しの最後の言葉と一緒に折り返す
+.home-flow-tail { white-space: nowrap; }
+.home-flow .home-flow-mark {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: -4px 0 0 8px;
+  vertical-align: middle;
+  border-radius: 0;
 }
 
 .home-cards {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (max-width: 720px) { grid-template-columns: 1fr; }
   gap: 12px;
   a {
     display: block;
+    height: 100%;
     background: var(--card);
     border-radius: 14px;
     padding: 16px;
@@ -285,84 +322,90 @@ html { scroll-padding-top: 64px; }
 
 .home-guide-note { font-size: 13px; color: var(--sub-ink); margin: 12px 0 0 !important; }
 
-// プライバシー（記録を iPhone の外に出さないこと）。紺の地で幅いっぱいに置き、トップでいちばん目立つ区画の 1 つにする
+// プライバシー（記録を iPhone の外に出さないこと）。紺の地に、大きな見出し・要点だけ白くした段落・設定アプリと同じ形の一覧を置く
 .home .home-privacy {
+  --privacy-tint: #8FD3AE;
+  --privacy-sub-ink: rgba(235, 235, 245, 0.6);
+  --privacy-list: #2B3747;
   background: #1E2A3A;
   color: #FFFFFF;
-  padding: 64px 0;
-  @media (prefers-color-scheme: dark) { background: #14202E; }
-  h2 { font-size: 34px; line-height: 1.35; margin-bottom: 16px; }
-  h2 span { color: var(--yellow); }
-  .home-lead { color: rgba(255, 255, 255, 0.85); font-size: 17px; max-width: 40em; }
+  padding: 72px 0;
+  @media (prefers-color-scheme: dark) {
+    --privacy-list: #212D3C;
+    background: #14202E;
+  }
+  .home-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+  // 見出しと一覧の項目名は、言葉の切れ目（原稿の <wbr>）でだけ折り返す
+  h2, dt { word-break: keep-all; }
+  h2 { font-size: 34px; font-weight: 700; line-height: 1.25; margin-bottom: 20px; }
   a { color: #8DC1FF; }
 }
 
-.home-privacy-points {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  // 記録を iPhone の外に出さないことを、幅いっぱいの大きな札にしていちばん目立たせる
-  li:first-child {
-    grid-column: 1 / -1;
-    background: rgba(255, 226, 122, 0.1);
-    border-color: rgba(255, 226, 122, 0.45);
-    padding: 28px;
-    h3 { font-size: 24px; }
-    p { font-size: 16px !important; }
-  }
-  li {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 16px;
-    padding: 20px;
-  }
-  svg { display: block; margin-bottom: 12px; }
-  h3 { color: #FFFFFF; font-size: 18px; }
-  p { color: rgba(255, 255, 255, 0.8); font-size: 14px; line-height: 1.7; margin: 0 !important; }
+// 鍵の印は、区画の右上（一覧の上）に置く。一覧の側をその分だけ下げる
+.home-privacy-mark {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  width: 60px;
+  height: 60px;
+  color: var(--privacy-tint);
 }
+.home-privacy-facts { padding-top: 76px; }
 
-.home-privacy-note { font-size: 13px; color: rgba(255, 255, 255, 0.7); margin: 0 !important; }
-
-// できること
-.home-features > .home-inner > h2 { text-align: center; margin-bottom: 40px; }
-
-.home-feature {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  margin-bottom: 56px;
-  &:last-child { margin-bottom: 0; }
-  &:nth-child(odd) .home-feature-shot { order: 2; }
-}
-
-.home-feature-shot {
-  background: var(--grouped);
-  border-radius: 20px;
-  padding: 24px;
-  // 使い方のページと同じ画像（2 倍の大きさ）を、width 属性の pt の幅を上限に置く
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
-}
-
-// 画像を 2 枚並べる時の、間の説明（「カゴを開くと」）
-.home-feature-caption {
-  margin: 16px 0 8px !important;
-  text-align: center;
-  font-size: 13px;
+.home-privacy-eyebrow { font-size: 15px; font-weight: 600; color: var(--privacy-sub-ink); margin: 0 0 10px !important; }
+// 段落は、要点（b）だけを白くして、ほかを沈める
+.home-privacy-lead {
+  font-size: 19px;
   font-weight: 600;
-  color: var(--sub-ink);
-  &::after { content: " ↓"; }
+  line-height: 1.7;
+  color: rgba(235, 235, 245, 0.55);
+  margin: 0 !important;
+  b { color: #FFFFFF; }
 }
+
+// 一覧は、設定アプリの行と同じ形（塗りの角丸、左に印と項目、右に値、行の間の線は文字の左端から）
+.home-privacy-list {
+  margin: 0 0 10px;
+  padding: 0 16px;
+  background: var(--privacy-list);
+  border-radius: 14px;
+  div {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 13px 0 13px 32px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  div + div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  svg {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    color: var(--privacy-tint);
+  }
+  dd { color: var(--privacy-sub-ink); white-space: nowrap; }
+}
+
+.home-privacy-note { font-size: 13px; line-height: 1.6; color: var(--privacy-sub-ink); margin: 0 !important; padding: 0 16px; }
 
 // ご意見・ご要望
 .home .home-contact {
@@ -389,14 +432,32 @@ html { scroll-padding-top: 64px; }
   }
   .home-catch { font-size: 30px; }
   .home-app h1 { font-size: 26px; }
-  // 狭い画面では、画面の絵の上の部分だけを見せて、使い方の入口までの距離を縮める
-  .home-hero-shot img { max-width: 260px; aspect-ratio: 640 / 520; object-fit: cover; object-position: top; }
-  .home .home-privacy { padding: 48px 0; }
-  .home .home-privacy h2 { font-size: 26px; }
-  .home-privacy-points { grid-template-columns: 1fr; }
-  .home-feature {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    &:nth-child(odd) .home-feature-shot { order: 0; }
+  // 狭い画面では、端末の上の部分（最初のカテゴリのカードの段まで）だけを見せて、使い方の入口までの距離を縮める
+  .home-hero-shot { padding-bottom: 0; }
+  .home-hero-device {
+    max-width: 280px;
+    aspect-ratio: 280 / 209;
+    border-bottom: 0;
+    border-radius: 45px 45px 0 0;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.25);
   }
+}
+
+// プライバシーの区画は、2 列だと一覧の行が 1 行に収まらなくなる幅（iPad の縦など）から 1 列にする
+@media (max-width: 900px) {
+  .home .home-privacy {
+    padding: 56px 0;
+    .home-inner { grid-template-columns: 1fr; gap: 32px; }
+    h2 { font-size: 30px; }
+  }
+  // 鍵の印は、見出しの右上に回り込ませる（区画を縦に伸ばさない）
+  .home-privacy-mark { position: static; float: right; width: 52px; height: 52px; margin: -4px -6px 8px 16px; }
+  .home-privacy-facts { padding-top: 0; }
+  .home-privacy-lead { clear: both; font-size: 17px; }
+  .home-privacy-list div { font-size: 15px; }
+}
+
+// 幅 320px（画面表示を拡大した iPhone など）では、見出しの 1 行目が鍵の印の横に収まるよう、見出しを小さくする
+@media (max-width: 340px) {
+  .home .home-privacy h2 { font-size: 26px; }
 }

@@ -1,6 +1,6 @@
 # nog-yo/hitokago-guide の GitHub Pages の Jekyll の設定。baseurl はリポジトリの名前に合わせる
 title: ひとかご
-description: お店のカゴと一緒に使う iPhone の買い物リスト「ひとかご」の紹介と使い方。アプリで扱う情報はすべて iPhone の中だけに保存し、外部へ送信しません。
+description: ひとかごは、買い忘れを防ぐ iPhone の買い物リストです。商品を追加すると売り場ごとに並び、お店で手に取ったものをカゴに入れてチェックできます。買い物の記録は iPhone の中だけに保存し、開発者にも外部にも送信しません。
 # トップのページの題名（「ひとかご | カゴ付きの買い物リスト」。jekyll-seo-tag が使う）
 tagline: カゴ付きの買い物リスト
 lang: ja
@@ -31,3 +31,7 @@ defaults:
     values:
       layout: page
       image: /assets/og-image.png
+  - scope:
+      path: "privacy.md"
+    values:
+      description: iPhone アプリ「ひとかご」とこのサイトのプライバシーポリシーです。買い物リストや購入履歴の保存先、外部と通信する場面、お問い合わせで受け取る情報を説明します。

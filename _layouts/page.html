@@ -4,4 +4,15 @@ layout: default
 ---
 <main class="container-lg px-3 my-5 markdown-body">
 {{ content }}
+{% if page.guide_order %}
+  {% assign next_order = page.guide_order | plus: 1 %}
+  {% assign next_guide = site.pages | where: "guide_order", next_order | first %}
+  <nav aria-label="次に読む">
+    {% if next_guide %}
+    <a href="{{ next_guide.url | relative_url }}">次に読む：{{ next_guide.title }} ›</a>
+    {% else %}
+    <a href="{{ '/faq/' | relative_url }}">よくある質問（Q&amp;A） ›</a>
+    {% endif %}
+  </nav>
+{% endif %}
 </main>

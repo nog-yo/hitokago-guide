@@ -10,6 +10,41 @@ layout: home
 {% endcomment %}
 {% capture app_store_url %}https://apps.apple.com/jp/app/id{{ site.app_store_id }}{% endcapture %}
 
+{% comment %}
+ヒーローの約束とプライバシーの区画で使う印。<use href="#mark-…"> で呼び出す。
+Apple の SF Symbols は、Apple の製品で動くアプリの開発にしか使えない（Xcode and Apple SDKs Agreement の 2.10）ので、このサイト用に描いたもの。
+「無い」ことを表す印（mark-no-…）は斜線を重ね、斜線の周りを mark-slash-cut で抜く。色は呼び出す側の color に従う。
+{% endcomment %}
+<svg class="home-marks" width="0" height="0" aria-hidden="true">
+  <defs>
+    <mask id="mark-slash-cut">
+      <rect width="24" height="24" fill="#fff"/>
+      <path d="M3.2 3.2l17.6 17.6" stroke="#000" stroke-width="4.6" stroke-linecap="round"/>
+    </mask>
+    <path id="mark-slash" d="M3.2 3.2l17.6 17.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+  </defs>
+  <symbol id="mark-lock-phone" viewBox="0 0 24 24" fill="none">
+    <rect x="5.25" y="1.75" width="13.5" height="20.5" rx="3.5" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="8.6" y="11" width="6.8" height="5.6" rx="1.3" fill="currentColor"/>
+    <path d="M10 11.2V9.5a2 2 0 0 1 4 0v1.7" stroke="currentColor" stroke-width="1.4"/>
+  </symbol>
+  <symbol id="mark-no-account" viewBox="0 0 24 24" fill="currentColor">
+    <g mask="url(#mark-slash-cut)"><circle cx="12" cy="7.6" r="4.1"/><path d="M12 13.4c-4.6 0-8.2 2.5-8.2 6 0 .9.7 1.6 1.6 1.6h13.2c.9 0 1.6-.7 1.6-1.6 0-3.5-3.6-6-8.2-6z"/></g>
+    <use href="#mark-slash"/>
+  </symbol>
+  <symbol id="mark-no-ads" viewBox="0 0 24 24" fill="currentColor">
+    <g mask="url(#mark-slash-cut)"><path d="M19.2 3.6c.9-.5 2 .1 2 1.2v12.4c0 1.1-1.1 1.7-2 1.2L12.3 15H10l1.3 4.3c.2.8-.4 1.7-1.3 1.7H8.6c-.6 0-1.1-.4-1.3-1L6 15H4.8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h7.5z"/></g>
+    <use href="#mark-slash"/>
+  </symbol>
+  <symbol id="mark-no-tracking" viewBox="0 0 24 24" fill="currentColor">
+    <g mask="url(#mark-slash-cut)"><rect x="3.5" y="12" width="4.6" height="8.5" rx="1.3"/><rect x="9.7" y="7.5" width="4.6" height="13" rx="1.3"/><rect x="15.9" y="3.5" width="4.6" height="17" rx="1.3"/></g>
+    <use href="#mark-slash"/>
+  </symbol>
+  <symbol id="mark-category" viewBox="0 0 24 24" fill="currentColor">
+    <path fill-rule="evenodd" d="M3 5a2 2 0 0 1 2-2h5.7a2 2 0 0 1 1.4.6l8.3 8.3a2 2 0 0 1 0 2.8l-5.7 5.7a2 2 0 0 1-2.8 0L3.6 12.1A2 2 0 0 1 3 10.7zm4.7 1.1a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z"/>
+  </symbol>
+</svg>
+
 <section class="home-hero">
   <div class="home-inner">
     <div class="home-hero-text">
@@ -21,123 +56,72 @@ layout: home
         </div>
       </div>
       <p class="home-catch">買い物リストに、<br><span>カゴがついた</span></p>
-      <p class="home-hero-lead">お店のカゴと一緒に使う iPhone の買い物リストです。家では商品名を打って追加。お店では、手に取った商品をタップしてカゴへ。売り場ごとに、あと何を買えばいいかがひと目でわかります。</p>
+      <p class="home-hero-lead">お店のカゴと一緒に使う iPhone の買い物リストです。売り場を離れる前に、あと何を買えばいいかがひと目でわかります。</p>
       <a class="home-download" href="{{ app_store_url }}"><img src="{{ '/images/app-store-badge.svg' | relative_url }}" alt="App Store からダウンロード" width="131" height="48"></a>
       <ul class="home-promises">
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><rect x="9" y="11" width="6" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 0 1 4 0V11"/></svg>
-          <a href="#privacy">データの外部送信なし</a>
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M3 3l18 18"/></svg>
-          <a href="#privacy">アカウント登録不要</a>
-        </li>
-        <li>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M3 3l18 18"/></svg>
-          <a href="#privacy">広告なし</a>
-        </li>
+        <li><svg width="18" height="18" aria-hidden="true"><use href="#mark-lock-phone"/></svg><a href="#privacy">データの外部送信なし</a></li>
+        <li><svg width="18" height="18" aria-hidden="true"><use href="#mark-no-account"/></svg><a href="#privacy">アカウント登録不要</a></li>
+        <li><svg width="18" height="18" aria-hidden="true"><use href="#mark-no-ads"/></svg><a href="#privacy">広告なし</a></li>
       </ul>
     </div>
     <div class="home-hero-shot">
-      <img src="{{ '/images/home-hero.png' | relative_url }}" alt="売り場ごとに並んだ商品のカードと、キャベツとにんじんの入ったカゴ" width="320" height="545">
+      <div class="home-hero-device">
+        <img src="{{ '/images/home-hero.png' | relative_url }}" alt="買い物タブの画面。売り場ごとに並んだ商品のカードと、キャベツとにんじんの入ったカゴ" width="320" height="696">
+      </div>
     </div>
   </div>
 </section>
 
 <section class="home-guide" id="guide">
   <div class="home-inner">
-    <h2>使い方</h2>
-    <div class="home-cards">
-      <a href="{{ '/guide/shopping-flow/' | relative_url }}"><b>買い物の流れ</b><span>商品の追加とリマインド、カゴの使い方、買った日の調べ方</span></a>
-      <a href="{{ '/guide/tips/' | relative_url }}"><b>知っておくと便利な機能</b><span>売り場を畳む、カゴから一覧の商品へ移る、金額の概算、ジェン文字を作るなど</span></a>
-      <a href="{{ '/guide/adding-items/' | relative_url }}"><b>商品を手早く追加する</b><span>候補から追加する、カテゴリとアイコンが決まる仕組み、Safari などから追加する</span></a>
-      <a href="{{ '/guide/stores/' | relative_url }}"><b>購入先ごとに買う</b><span>お店ごとのリスト、「購入先指定なし」の商品</span></a>
-    </div>
-    <p class="home-guide-note">アプリの「使い方」（マイページ）では書ききれない、細かな動きと使い方をまとめています。アプリの更新により、画面や動きがこのサイトの説明と異なる場合があります。</p>
+    <h2>買い物の基本の流れ</h2>
+    <ol class="home-flow">
+      <li>
+        <h3>家で、買うものを<span class="home-flow-tail">追加する<img class="home-flow-mark" src="{{ '/images/flow-mark-add.png' | relative_url }}" alt="" width="28" height="28"></span></h3>
+        <p>買い物タブの「＋」をタップ。商品名を打って「↑」を押すと、リストに追加できます。</p>
+        <img loading="lazy" src="{{ '/images/flow-add-panel.png' | relative_url }}" alt="ブロッコリーを入力した追加パネル。商品名の右に追加の矢印がある" width="440" height="144">
+      </li>
+      <li>
+        <h3>お店で、取った商品を<span class="home-flow-tail">カゴへ<img class="home-flow-mark" src="{{ '/images/flow-mark-cart.png' | relative_url }}" alt="" width="28" height="28"></span></h3>
+        <p>お店のカゴに入れたら、その商品のカードをタップ。チェックが付き、その売り場でまだ取っていない商品が分かります。</p>
+        <img loading="lazy" src="{{ '/images/flow-card-view.png' | relative_url }}" alt="野菜・果物の売り場で、カゴに入れたキャベツとにんじんにチェックが付き、トマトが残っている" width="440" height="342">
+      </li>
+      <li>
+        <h3>レジのあとで、まとめて<span class="home-flow-tail">購入済みにする<img class="home-flow-mark" src="{{ '/images/flow-mark-purchased.png' | relative_url }}" alt="" width="28" height="28"></span></h3>
+        <p>カゴを開いて、左端の丸を右端までスライド。買ったものは日付ごとに履歴に残り、今日買わなかったものは次のリストに残ります。</p>
+        <img loading="lazy" src="{{ '/images/flow-slide-to-purchase.png' | relative_url }}" alt="カゴの下の帯で、白い丸を右へスライドしている途中" width="430" height="199">
+        <img loading="lazy" src="{{ '/images/flow-purchase-complete.png' | relative_url }}" alt="右端までスライドした後の帯。「お買い物完了！」と出て、右端の丸がチェックになっている" width="430" height="58">
+      </li>
+    </ol>
+
+    <h3>もっと詳しく見る</h3>
+    <ul class="home-cards" role="list">
+      {% assign guides = site.pages | where_exp: "item", "item.guide_order != nil" | sort: "guide_order" %}
+      {% for guide in guides %}
+      <li><a href="{{ guide.url | relative_url }}"><b>{{ guide.title }}</b><span>{{ guide.summary }}</span></a></li>
+      {% endfor %}
+    </ul>
+    <p><a href="{{ '/faq/' | relative_url }}">よくある質問（Q&amp;A）</a></p>
+    <p class="home-guide-note">アプリの更新により、画面や動きがこのサイトの説明と異なる場合があります。</p>
   </div>
 </section>
 
 <section class="home-privacy" id="privacy">
   <div class="home-inner">
-    <h2>買い物の記録は、<br><span>あなたの iPhone の中だけに</span></h2>
-    <p class="home-lead">何を、いつ買ったか。毎日の買い物の記録は、暮らしそのものです。ひとかごが、その記録を iPhone の外へ送ることはありません。</p>
-    <ul class="home-privacy-points">
-      <li>
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FFE27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><rect x="9" y="11" width="6" height="5" rx="1"/><path d="M10 11V9.5a2 2 0 0 1 4 0V11"/></svg>
-        <h3>データを外部へ送信しません</h3>
-        <p>追加した商品、買った日、金額といった記録はもちろん、アプリで扱う情報はすべて iPhone の中だけに保存します。外部への送信は一切ありません。</p>
-      </li>
-      <li>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFE27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M3 3l18 18"/></svg>
-        <h3>アカウント登録不要</h3>
-        <p>メールアドレスも名前も聞きません。インストールしてすぐに使えます。</p>
-      </li>
-      <li>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFE27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M3 3l18 18"/></svg>
-        <h3>広告・トラッキングなし</h3>
-        <p>広告も、使い方を分析・追跡する仕組みも組み込んでいません。</p>
-      </li>
-      <li>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFE27A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
-        <h3>自動の判定も iPhone の中で</h3>
-        <p>カテゴリとアイコンの自動の判定は、iPhone の中で動く Apple Intelligence のモデルと、アプリの中の表で行います。商品名を外へ送りません。</p>
-      </li>
-    </ul>
-    <p class="home-privacy-note">iPhone のバックアップに含まれることや、Safari などの共有メニューから追加する時の通信は、<a href="{{ '/privacy/' | relative_url }}">プライバシーポリシー</a>にまとめています。</p>
-  </div>
-</section>
-
-<section class="home-features">
-  <div class="home-inner">
-    <h2>ひとかごでできること</h2>
-
-    <div class="home-feature">
-      <div class="home-feature-shot">
-        <img src="{{ '/images/flow-card-view.png' | relative_url }}" alt="カード表示の一覧。カゴに入れたキャベツとにんじんのカードが緑になっている" width="440" height="342">
-        <p class="home-feature-caption">カゴを開くと</p>
-        <img src="{{ '/images/flow-cart-open.png' | relative_url }}" alt="開いたカゴ。にんじんとキャベツの下に、白い丸が左端にある「スライドで購入」の帯が表示されている" width="430" height="160">
-      </div>
-      <div>
-        <h3>取ったらカゴへ</h3>
-        <p>売り場で商品を見つけたら、カードをタップ。カゴに入れた商品にはチェックが付き、まだ取っていない商品と並べて見られます。レジを済ませたら、カゴの白い丸を右端までスライド。カゴの中身だけがまとめて購入済みになり、次に買う商品はリストに残ります。</p>
-        <a class="home-more" href="{{ '/guide/shopping-flow/#2-お店でカゴに入れながら回る' | relative_url }}">カゴの使い方 ›</a>
-      </div>
+    <div class="home-privacy-text">
+      <svg class="home-privacy-mark" width="60" height="60" aria-hidden="true"><use href="#mark-lock-phone"/></svg>
+      <p class="home-privacy-eyebrow">プライバシー</p>
+      <h2>買い物の記録は、<wbr>あなたの&nbsp;iPhone&nbsp;の<wbr>中だけに。</h2>
+      <p class="home-privacy-lead">追加した商品、買った日、金額といった買い物の記録は、<b>すべて iPhone の中だけに保存します。開発者にも、ほかの誰にも送りません。</b></p>
     </div>
-
-    <div class="home-feature">
-      <div class="home-feature-shot"><img src="{{ '/images/flow-add-panel.png' | relative_url }}" alt="「ブロッコリー」と入力した追加パネル。「野菜・果物」のカテゴリとアイコンが付いている" width="440" height="144"></div>
-      <div>
-        <h3>商品名を打つだけ</h3>
-        <p>「ブロッコリー」と打つと、野菜のアイコンが付き、売り場は「野菜・果物」に。「↑」を押せば追加でき、そのまま次の商品を打てます。購入先やメモは、必要な時だけ付けられます。</p>
-        <a class="home-more" href="{{ '/guide/adding-items/#カテゴリは自動で決まる' | relative_url }}">カテゴリとアイコンが決まる仕組み ›</a>
-      </div>
-    </div>
-
-    <div class="home-feature">
-      <div class="home-feature-shot"><img src="{{ '/images/adding-suggestions.png' | relative_url }}" alt="「りん」を入力した時の候補。みりん、プリン、りんごが表示されている" width="440" height="301"></div>
-      <div>
-        <h3>いつもの商品は候補から追加</h3>
-        <p>「りん」と打つと、前に買った「りんご」「プリン」「みりん」が候補に出ます。商品名を打つ前は、これまでに買った間隔から「そろそろ買う頃」の商品を提案します。</p>
-        <a class="home-more" href="{{ '/guide/adding-items/#前に買った商品は候補から追加する' | relative_url }}">候補から追加する ›</a>
-      </div>
-    </div>
-
-    <div class="home-feature">
-      <div class="home-feature-shot"><img src="{{ '/images/flow-history.png' | relative_url }}" alt="11月19日の購入履歴。コーヒーと食パンの行の右に、それぞれ「また買う」がある" width="420" height="239"></div>
-      <div>
-        <h3>この前、いつ買ったっけ？</h3>
-        <p>買ったものは日付ごとに残ります。前に買った日を調べたり、「また買う」から次のリストに追加したりできます。金額の記録はお好みで。商品名と買った日は、金額を付けなくても残ります。</p>
-        <a class="home-more" href="{{ '/guide/shopping-flow/#4-あとから買った日を調べる' | relative_url }}">買った日を調べる ›</a>
-      </div>
-    </div>
-
-    <div class="home-feature">
-      <div class="home-feature-shot"><img src="{{ '/images/flow-reminder.png' | relative_url }}" alt="シャンプーのリマインドをオンにしたところ。スイッチの下で日付・時・分と「予備の通知」を選べる" width="404" height="587"></div>
-      <div>
-        <h3>忘れたくない商品は、日時を決めて通知</h3>
-        <p>リマインドのスイッチをオンにして日時を選ぶだけ。たとえば、シャンプーを買うよう明日の 18 時に通知できます。まだ買っていなければもう一度知らせる、予備の通知も選べます。</p>
-        <a class="home-more" href="{{ '/guide/shopping-flow/#忘れたくない商品にリマインドを付ける' | relative_url }}">リマインドを付ける ›</a>
-      </div>
+    <div class="home-privacy-facts">
+      <dl class="home-privacy-list">
+        <div><dt><svg width="20" height="20" aria-hidden="true"><use href="#mark-no-account"/></svg>アカウント登録</dt><dd>不要</dd></div>
+        <div><dt><svg width="20" height="20" aria-hidden="true"><use href="#mark-no-ads"/></svg>広告</dt><dd>なし</dd></div>
+        <div><dt><svg width="20" height="20" aria-hidden="true"><use href="#mark-no-tracking"/></svg>使い方の分析・追跡</dt><dd>なし</dd></div>
+        <div><dt><svg width="20" height="20" aria-hidden="true"><use href="#mark-category"/></svg>カテゴリと<wbr>アイコンの判定</dt><dd>iPhone の中</dd></div>
+      </dl>
+      <p class="home-privacy-note">iPhone のバックアップに含まれることや、Safari などの共有メニューから追加する時の通信は、<a href="{{ '/privacy/' | relative_url }}">プライバシーポリシー</a>にまとめています。</p>
     </div>
   </div>
 </section>
